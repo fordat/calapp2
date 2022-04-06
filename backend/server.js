@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import taskRoutes from './routes/taskRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 import mongoose from 'mongoose';
 
 const app = express();
@@ -10,6 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 app.use('/api/tasks', taskRoutes);
+app.use('/api/users', userRoutes);
 
 const port = process.env.PORT || 5000;
 
