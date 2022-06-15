@@ -49,15 +49,12 @@ export const updateTask = async (req, res) => {
     return res.status(404).send('Task not found');
   }
 
-  // check for user
-  const user = await User.findById(req.user.id);
-
-  if (!user) {
+  if (!req.user) {
     return res.status(401).send('User not found');
   }
 
   // check if task matches logged in user
-  if (task.user.toString() !== user.id) {
+  if (task.user.toString() !== req.user.id) {
     return res.status(401).send('User not authorized');
   }
 
@@ -84,15 +81,13 @@ export const deleteTask = async (req, res) => {
   }
 
   // check for user
-  const user = await User.findById(req.user.id);
-
-  if (!user) {
+  if (!req.user) {
     console.log("User not found");
     return res.status(401).send('User not found');
   }
 
   // check if task matches logged in user
-  if (task.user.toString() !== user.id) {
+  if (task.user.toString() !== req.user.id) {
 
     console.log("User not authorized");
 
