@@ -14,7 +14,10 @@ function Dashboard() {
   }, [user, navigate]);
 
   return (
-    <div>Dashboard!!!</div>
+    <div>
+      <div>Dashboard!!!</div>
+      <div>Soon to be the form</div>
+    </div>
   )
 }
 
