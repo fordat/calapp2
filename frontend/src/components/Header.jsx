@@ -12,9 +12,10 @@ function Header() {
   console.log(user);
 
   const onLogout = () => {
-    dispatch(logout());
-    dispatch(reset());
-    navigate('/');
+    console.log("we loggin out!!!")
+    dispatch(logout())
+    dispatch(reset())
+    navigate('/')
   }
 
   return (
