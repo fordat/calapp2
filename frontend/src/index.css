@@ -37,17 +37,23 @@ h3 {
 
 .container {
   width: 100%;
-  max-width: 960px;
+  max-width: 1080px;
   margin: 0 auto;
   padding: 0 20px;
   text-align: center;
+}
+
+.dashboard-wrapper {
+  display: flex;
+  justify-content: space-between;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
+  padding: 20px 20px;
+  background-color:rgba(85, 75, 75, 0.5);
   border-bottom: 1px solid #e6e6e6;
   margin-bottom: 60px;
 }
@@ -112,6 +118,11 @@ h3 {
 .content {
   width: 70%;
   margin: 0 auto;
+}
+
+.dashboard-form {
+  width: 20%;
+  background-color: pink;
 }
 
 .form-group {

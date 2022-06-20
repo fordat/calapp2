@@ -21,7 +21,7 @@ function Header() {
   return (
     <div className='header'>
       <div className="logo">
-        <Link to='/'>TaskManager</Link>
+        <Link to='/'><h2>TaskManager</h2></Link>
       </div>
       <ul>
         { user ? (<li>
