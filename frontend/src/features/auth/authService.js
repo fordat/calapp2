@@ -27,8 +27,6 @@ const login = async (userData) => {
 }
 
 const logout = () => {
-  console.log("are we in here");
-
   localStorage.removeItem("user");
 }
 
