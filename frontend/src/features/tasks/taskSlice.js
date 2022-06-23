@@ -10,19 +10,31 @@ const initialState = {
 }
 
 // Create a task for the  user!
-export const create = createAsyncThunk('tasks/create', 
+export const createTask = createAsyncThunk('tasks/createTask', 
   async (text, thunkAPI) => {
 
     try {
-      console.log(thunkAPI.getState().auth.user);
-
       const token = thunkAPI.getState().auth.user.token;
 
-      return await taskService.create(text, token);
+      return await taskService.createTask(text, token);
     } catch (error) {
       const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
 
       return thunkAPI.rejectWithValue(message);
+    }
+  });
+
+// Get da tasks
+export const getTasks = createAsyncThunk('tasks/getTasks',
+  async (_, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+
+      return await taskService.getTasks(token);
+    } catch (error) {
+      const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+
+      return thunkAPI.rejectWithValue(message);      
     }
   });
 
@@ -34,16 +46,31 @@ export const taskSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(create.pending, (state) => {
+      .addCase(createTask.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(create.fulfilled, (state, action) => {
+      .addCase(createTask.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        console.log("action payload in create", action.payload)
+        console.log("action payload in createTask", action.payload)
         state.tasks.push(action.payload);
       })
-      .addCase(create.rejected, (state, action) => {
+      .addCase(createTask.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        console.log("rejected payload", action.payload)
+        state.message = action.payload;
+      })
+      .addCase(getTasks.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getTasks.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        console.log("action payload in getTasks", action.payload);
+        state.tasks = action.payload;
+      })
+      .addCase(getTasks.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         console.log("rejected payload", action.payload)

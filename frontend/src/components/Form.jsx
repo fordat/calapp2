@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { create } from '../features/tasks/taskSlice'
+import { createTask } from '../features/tasks/taskSlice';
 
 
 function Dashboard() {
@@ -15,7 +15,7 @@ function Dashboard() {
       alert("Please enter some text");
     }
 
-    dispatch(create({text}));
+    dispatch(createTask({text}));
   }
 
   return (

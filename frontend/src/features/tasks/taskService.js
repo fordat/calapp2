@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const API_URL = '/api/tasks/'
 
-const create = async (text, token) => {
+const createTask = async (text, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`
@@ -11,7 +11,7 @@ const create = async (text, token) => {
 
   const response = await axios.post(API_URL, text, config);
 
-  console.log('create! ', response);
+  console.log('createTask! ', response);
 
   if (response.data) {
     console.log("Ua did it!");
@@ -20,8 +20,23 @@ const create = async (text, token) => {
   return response.data;
 }
 
+const getTasks = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+
+  const response = await axios.get(API_URL, config);
+
+  console.log(' get tasks!   ', response);
+
+  return response.data;
+}
+
 const taskService = {
-  create,
+  createTask,
+  getTasks,
 }
 
 export default taskService
