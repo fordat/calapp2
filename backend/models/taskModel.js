@@ -9,6 +9,9 @@ const taskSchema = mongoose.Schema({
   text: {
     type: String,
     required: true,
+  },
+  date: {
+    type: String,
   }
 }, 
 {

@@ -15,7 +15,7 @@ function Dashboard() {
 
   const { tasks, isLoading, isError, message } = useSelector((state) => state.tasks);
 
-  const listTasks = tasks.map((d) => <li key={d.text}>{d.text}</li>)
+  const listTasks = tasks.map((d) => <li key={d.text}>{d.text + " " + d.date} </li>)
 
   useEffect(() => {
     if(!user) {
@@ -29,25 +29,11 @@ function Dashboard() {
     }
   }, [user, navigate, dispatch]);
 
-  // const onChange = (e) => {
-  //   setTaskData(e.target.value);
-  // }
-
-  // const onSubmit = e => {
-  //   e.preventDefault();
-
-  //   if (!text) {
-  //     alert("Please enter some text");
-  //   }
-
-  //   dispatch(create({text}));
-  // }
-
-  console.log(tasks);
-
   return (
     <div className="dashboard-wrapper">
-      {listTasks}
+      <ul className="dashboard-list">
+       {listTasks}
+      </ul>
       <div>Dashboard!!! Hello {user && user.name}</div>
       <Form />
     </div>

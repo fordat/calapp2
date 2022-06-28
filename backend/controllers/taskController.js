@@ -27,7 +27,8 @@ export const createTask = async (req, res) => {
   try {
     const task = await Task.create({
       text: req.body.text,
-      user: req.user.id
+      user: req.user.id,
+      date: req.body.date,
     });
 
     res.status(200).json(task);

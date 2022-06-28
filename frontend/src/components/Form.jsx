@@ -4,7 +4,13 @@ import { createTask } from '../features/tasks/taskSlice';
 
 
 function Dashboard() {
-  const [text, setText] = useState('');
+  const [taskValues, setTaskValues] = useState({
+    text: '',
+    date: '',
+  });
+
+  const { text, date } = taskValues;
+
 
   const dispatch = useDispatch();
 
@@ -15,7 +21,7 @@ function Dashboard() {
       alert("Please enter some text");
     }
 
-    dispatch(createTask({text}));
+    dispatch(createTask({text, date}));
   }
 
   return (
@@ -32,7 +38,17 @@ function Dashboard() {
               id="text"
               name="text"
               value={text}
-              onChange={(e) => setText(e.target.value)}
+              onChange={(e) => setTaskValues({...taskValues, [e.target.name]: e.target.value})}
+            />
+          </div>
+          <div className="form-group">
+            <input 
+              type="text"
+              className="form-control"
+              id="date"
+              name="date"
+              value={date}
+              onChange={(e) => setTaskValues({...taskValues, [e.target.name]: e.target.value})}
             />
           </div>
           <div className="form-group">
