@@ -35,6 +35,18 @@ h3 {
   margin-bottom: 10px;
 }
 
+table td, table th {
+  border: 1px solid black;
+}
+
+/* .calendar-wrapper {
+
+} */
+
+.calendar {
+  border-collapse: collapse;
+}
+
 .container {
   width: 100%;
   max-width: 1080px;
