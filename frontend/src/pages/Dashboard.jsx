@@ -15,34 +15,39 @@ function Dashboard() {
 
   const { tasks, isLoading, isError, message } = useSelector((state) => state.tasks);
 
+  useEffect(() => {
+    if(!user) {
+      navigate('/login')
+    }
+
+    dispatch(getTasks());
+
+    return () => {
+      dispatch(reset);
+    }
+  }, [user, navigate, dispatch]);
+
   const listTasks = tasks.map((d) => <li key={d.text}>{d.text + " " + d.date} </li>);
 
   const today = new Date();
-  const currentMonth = today.getMonth();
+  const currentMonth = 11;
   const currentYear = today.getFullYear();
 
 
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const months = ["January", 
+                  "February", 
+                  "March", 
+                  "April", 
+                  "May", 
+                  "June", 
+                  "July", 
+                  "August", 
+                  "September", 
+                  "October", 
+                  "November", 
+                  "December"];
 
   const calculateDaysInMonth = (iYear, iMonth) => 32 - new Date(iYear, iMonth, 32).getDate();
-
-  // const createCalendar = (year, month) => {
-  //   let firstDay = (new Date(year, month)).getDay();
-
-  //   let date = 1;
-
-  //   let daWholeThang = {};
-
-  //   for (let i = 0; i < 6; i++) {
-  //     let row = <tr>{rowDays}</tr>;
-
-  //     for (let j = 0; j < 7; j++) {
-  //       if (i === 0 && j < firstDay) {
-
-  //       }
-  //     }
-  //   }
-  // }
 
   let firstDay = (new Date(currentYear, currentMonth)).getDay();
 
@@ -87,33 +92,8 @@ function Dashboard() {
   let newdays = rows.map((d, i) => {
     return <tr>{d}</tr>
   })
-
-  // const firstDayOfMonth = () => {
-  //   let dateObject = this.state.dateObject;
-  //   let firstDay = moment(dateObject)
-  //                .startOf("month")
-  //                .format("d"); 
-  //  return firstDay;
-  // };
-
-  // for (let i = 0; i < this.)
-
   
   const calendar = <tbody id="calendar-body">{newdays}</tbody>
-
-
-
-  useEffect(() => {
-    if(!user) {
-      navigate('/login')
-    }
-
-    dispatch(getTasks());
-
-    return () => {
-      dispatch(reset);
-    }
-  }, [user, navigate, dispatch]);
 
   return (
     <div className="dashboard-wrapper">
