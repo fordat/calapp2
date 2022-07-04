@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getTasks, reset } from '../features/tasks/taskSlice';
-import moment from 'moment';
 
 import Form from '../components/Form';
 
@@ -25,6 +24,8 @@ function Dashboard() {
 
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
+  const calculateDaysInMonth = (iYear, iMonth) => 32 - new Date(iYear, iMonth, 32).getDate();
+
   // const createCalendar = (year, month) => {
   //   let firstDay = (new Date(year, month)).getDay();
 
@@ -43,9 +44,49 @@ function Dashboard() {
   //   }
   // }
 
+  let firstDay = (new Date(currentYear, currentMonth)).getDay();
+
   let blanks = [];
 
-  console.log("day", today);
+  console.log("day", firstDay);
+
+  for (let i = 0; i < firstDay; i++) {
+    blanks.push(
+      <td className="calendar-day empty">{""}</td>
+    );
+  }
+
+  let daysInMonth = [];
+
+  for (let d = 1; d <= calculateDaysInMonth(currentYear, currentMonth); d++) {
+    daysInMonth.push(
+      <td key={d} className="calendar-day">
+        {d}
+      </td>
+    );
+  }
+
+  var totalDays = [...blanks, ...daysInMonth];
+
+  let rows = [];
+  let cells = [];
+
+  totalDays.forEach((row, i) => {
+    if (i % 7 !== 0) {
+      cells.push(row);
+    } else {
+      rows.push(cells);
+      cells = [];
+      cells.push(row);
+    }
+    if (i === totalDays.length - 1) {
+      rows.push(cells);
+    }
+  });
+
+  let newdays = rows.map((d, i) => {
+    return <tr>{d}</tr>
+  })
 
   // const firstDayOfMonth = () => {
   //   let dateObject = this.state.dateObject;
@@ -57,9 +98,8 @@ function Dashboard() {
 
   // for (let i = 0; i < this.)
 
-  const daysInMonth = (iYear, iMonth) => 32 - new Date(iYear, iMonth, 32).getDate();
   
-  const calendar = <tbody id="calendar-body"></tbody>
+  const calendar = <tbody id="calendar-body">{newdays}</tbody>
 
 
 
