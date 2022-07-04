@@ -30,7 +30,7 @@ function Dashboard() {
   const listTasks = tasks.map((d) => <li key={d.text}>{d.text + " " + d.date} </li>);
 
   const today = new Date();
-  const currentMonth = 11;
+  const currentMonth = today.getMonth();
   const currentYear = today.getFullYear();
 
 
