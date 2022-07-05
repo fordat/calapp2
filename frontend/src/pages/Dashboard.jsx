@@ -30,8 +30,12 @@ function Dashboard() {
   const listTasks = tasks.map((d) => <li key={d.text}>{d.text + " " + d.date} </li>);
 
   const today = new Date();
-  const currentMonth = today.getMonth();
-  const currentYear = today.getFullYear();
+  const trueMonth = today.getMonth();
+  const trueYear = today.getFullYear();
+  const currentDate = today.getDate();
+
+  const [currentMonth, setCurrentMonth] = useState(today.getMonth());
+  const [currentYear, setCurrentYear] = useState(today.getFullYear());
 
 
   const months = ["January", 
@@ -47,53 +51,76 @@ function Dashboard() {
                   "November", 
                   "December"];
 
-  const calculateDaysInMonth = (iYear, iMonth) => 32 - new Date(iYear, iMonth, 32).getDate();
+  const calculateDaysInMonth = (year, month) => 32 - new Date(year, month, 32).getDate();
 
-  let firstDay = (new Date(currentYear, currentMonth)).getDay();
+  const generateCalendar = (currentYear, currentMonth) => {
+    let firstDay = (new Date(currentYear, currentMonth)).getDay();
 
-  let blanks = [];
-
-  console.log("day", firstDay);
-
-  for (let i = 0; i < firstDay; i++) {
-    blanks.push(
-      <td className="calendar-day empty">{""}</td>
-    );
-  }
-
-  let daysInMonth = [];
-
-  for (let d = 1; d <= calculateDaysInMonth(currentYear, currentMonth); d++) {
-    daysInMonth.push(
-      <td key={d} className="calendar-day">
-        {d}
-      </td>
-    );
-  }
-
-  var totalDays = [...blanks, ...daysInMonth];
-
-  let rows = [];
-  let cells = [];
-
-  totalDays.forEach((row, i) => {
-    if (i % 7 !== 0) {
-      cells.push(row);
-    } else {
-      rows.push(cells);
-      cells = [];
-      cells.push(row);
-    }
-    if (i === totalDays.length - 1) {
-      rows.push(cells);
-    }
-  });
-
-  let newdays = rows.map((d, i) => {
-    return <tr>{d}</tr>
-  })
+    let blanks = [];
   
-  const calendar = <tbody id="calendar-body">{newdays}</tbody>
+    for (let i = 0; i < firstDay; i++) {
+      blanks.push(
+        <td className="calendar-day empty">{""}</td>
+      );
+    }
+  
+    let daysInMonth = [];
+  
+    for (let d = 1; d <= calculateDaysInMonth(currentYear, currentMonth); d++) { 
+      let dayClass = (d === currentDate && trueYear === currentYear && trueMonth === currentMonth) ? "today" : "";
+      daysInMonth.push(
+        <td key={d} className={`calendar-day ${dayClass}`}>
+          {d}
+        </td>
+      );
+    }
+  
+    var totalDays = [...blanks, ...daysInMonth];
+  
+    let rows = [];
+    let cells = [];
+  
+    totalDays.forEach((day, i) => {
+      if (i % 7 !== 0) {
+        cells.push(day);
+      } else {
+        rows.push(cells);
+        cells = [];
+        cells.push(day);
+      }
+      if (i === totalDays.length - 1) {
+        rows.push(cells);
+      }
+    });
+  
+    let newdays = rows.map((d, i) => {
+      return <tr>{d}</tr>
+    });
+
+    return <tbody id="calendar-body">{newdays}</tbody>;
+  }
+  
+  const onClickPrev = (e) => {
+    e.preventDefault();
+
+    if (currentMonth === 0) {
+      setCurrentMonth(11)
+      setCurrentYear(currentYear => currentYear - 1);
+    } else {
+      setCurrentMonth(currentMonth => currentMonth - 1);
+    }
+  }
+
+  const onClickNext = (e) => {
+    e.preventDefault();
+
+    if (currentMonth !== 0 && currentMonth % 11 === 0) {
+      setCurrentMonth(0)
+      setCurrentYear(currentYear => currentYear + 1);
+    } else {
+      setCurrentMonth(currentMonth => currentMonth + 1);
+    }
+  }
 
   return (
     <div className="dashboard-wrapper">
@@ -116,8 +143,12 @@ function Dashboard() {
                 <th>Sat</th>
               </tr>
             </thead>
-            {calendar}
+            {generateCalendar(currentYear, currentMonth)}
           </table>
+        </div>
+        <div className="calendar-control">
+          <div style={{backgroundColor: "red"}} className="calendar-btn prev" onClick={onClickPrev}> Prev! </div>
+          <div style={{backgroundColor: "blue"}} className="calendar-btn next" onClick={onClickNext}> Next! </div>
         </div>
       </div>
       <Form />

@@ -21,7 +21,7 @@ p {
 }
 
 ul {
-  list-style: square;
+  list-style: none;
 }
 
 li {
@@ -37,6 +37,8 @@ h3 {
 
 table td, table th {
   border: 1px solid black;
+  width: 4rem;
+  height: 4rem;
 }
 
 /* .calendar-wrapper {
@@ -45,6 +47,17 @@ table td, table th {
 
 .calendar {
   border-collapse: collapse;
+}
+
+.calendar-btn {
+  vertical-align: middle;
+  width: 8rem;
+}
+
+.calendar-control {
+  height: 2rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 .container {
@@ -124,6 +137,10 @@ table td, table th {
   cursor: pointer;
   border: none;
   background: none;
+}
+
+.today {
+  background-color: rgb(30, 196, 238);
 }
 
 .form,
