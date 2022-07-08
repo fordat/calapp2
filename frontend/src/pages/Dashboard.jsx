@@ -27,6 +27,13 @@ function Dashboard() {
     }
   }, [user, navigate, dispatch]);
 
+  const tasks2 = tasks.map((d) => ({title: d.text,
+                                    day: new Date(d.date).getDate(),
+                                    month: new Date(d.date).getMonth(),
+                                    year: new Date(d.date).getFullYear()}));
+
+  console.log(tasks2);
+
   const listTasks = tasks.map((d) => <li key={d.text}>{d.text + " " + d.date} </li>);
 
   const today = new Date();
@@ -67,10 +74,16 @@ function Dashboard() {
     let daysInMonth = [];
   
     for (let d = 1; d <= calculateDaysInMonth(currentYear, currentMonth); d++) { 
+      let result = tasks2.find(task => task.day === d && task.month === currentMonth && task.year === currentYear)
+      
+      let eventClass = result ? "event-class" : "";
+      let eventName = result ? `${result.title}` : "";
+
       let dayClass = (d === currentDate && trueYear === currentYear && trueMonth === currentMonth) ? "today" : "";
       daysInMonth.push(
-        <td key={d} className={`calendar-day ${dayClass}`}>
-          {d}
+        <td key={d} className={`calendar-day ${dayClass} ${eventClass}`}>
+          <div className="calendar-date">{d}</div>
+          <div>{eventName}</div>
         </td>
       );
     }
@@ -100,9 +113,7 @@ function Dashboard() {
     return <tbody id="calendar-body">{newdays}</tbody>;
   }
   
-  const onClickPrev = (e) => {
-    e.preventDefault();
-
+  const onClickPrev = () => {
     if (currentMonth === 0) {
       setCurrentMonth(11)
       setCurrentYear(currentYear => currentYear - 1);
@@ -111,9 +122,7 @@ function Dashboard() {
     }
   }
 
-  const onClickNext = (e) => {
-    e.preventDefault();
-
+  const onClickNext = () => {
     if (currentMonth !== 0 && currentMonth % 11 === 0) {
       setCurrentMonth(0)
       setCurrentYear(currentYear => currentYear + 1);
@@ -124,12 +133,10 @@ function Dashboard() {
 
   return (
     <div className="dashboard-wrapper">
-      <ul className="dashboard-list">
-       {listTasks}
-      </ul>
+
       <div className="calendar-wrapper">
         <div>Dashboard!!! Hello {user && user.name}</div>
-        <div>
+        <div className="calendar-body">
           <h3 className="calendar-header">{months[currentMonth] + " " + currentYear}</h3>
           <table className="calendar">
             <thead>
@@ -147,9 +154,12 @@ function Dashboard() {
           </table>
         </div>
         <div className="calendar-control">
-          <div style={{backgroundColor: "red"}} className="calendar-btn prev" onClick={onClickPrev}> Prev! </div>
-          <div style={{backgroundColor: "blue"}} className="calendar-btn next" onClick={onClickNext}> Next! </div>
+          <div className="btn" onClick={onClickPrev}> Prev! </div>
+          <div className="btn" onClick={onClickNext}> Next! </div>
         </div>
+        <ul className="dashboard-list">
+          {listTasks}
+        </ul>
       </div>
       <Form />
     </div>

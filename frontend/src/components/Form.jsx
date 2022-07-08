@@ -22,6 +22,8 @@ function Dashboard() {
     }
 
     dispatch(createTask({text, date}));
+
+    setTaskValues({ text: '', date: '' });
   }
 
   return (
@@ -31,6 +33,7 @@ function Dashboard() {
       </section>
       <section>
         <form onSubmit={onSubmit}>
+          <div>Text</div>
           <div className="form-group">
             <input 
               type="text"
@@ -41,6 +44,7 @@ function Dashboard() {
               onChange={(e) => setTaskValues({...taskValues, [e.target.name]: e.target.value})}
             />
           </div>
+          <div>Date</div>
           <div className="form-group">
             <input 
               type="text"
