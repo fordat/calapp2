@@ -112,8 +112,12 @@ table td, table th {
 
 .event-moop {
   content: url(./img/doopp.png);
-  /* width: 20px;
-  height: 20px; */
+  animation: shrinkgrow 5s infinite;
+  margin: auto auto;
+}
+
+.event-candle {
+  content: url(./img/candle.png);
   animation: shrinkgrow 5s infinite;
   margin: auto auto;
 }

@@ -74,19 +74,45 @@ function Dashboard() {
     let daysInMonth = [];
   
     for (let d = 1; d <= calculateDaysInMonth(currentYear, currentMonth); d++) { 
-      let result = tasks2.find(task => task.day === d && task.month === currentMonth && task.year === currentYear)
+      let eventList = tasks2.filter(task => task.day === d && task.month === currentMonth && task.year === currentYear);
+
+      let eventsInDay = [];
+
+      // if (eventList.length > 0) {
+      //   for (let e = 0; e <= eventList.length; e++) {
+      //     eventsInDay.push(
+      //       <div className="event">
+      //         <div className="event-wrapper">
+      //           <div className={`event-${eventList[e].title}`} ></div>
+      //         </div>
+      //         <div>{eventList[e].title}</div>
+      //       </div>
+      //     )
+      //   }
+      // }
+
+      for (let e = 0; e <= eventList.length; e++) {
+        if(eventList[e]) {
+          eventsInDay.push(
+            <div className="event">
+              <div className="event-wrapper">
+                <div className={`event-${eventList[e].title}`} ></div>
+              </div>
+              <div>{eventList[e].title}</div>
+            </div>
+          )
+        }
+      }
+
+      console.log(eventsInDay);
       
-      let eventClass = result ? "event-class" : "";
-      let eventName = result ? `${result.title}` : "";
+      let eventClass = eventList.length !== 0 ? "event-class" : "";
 
       let dayClass = (d === currentDate && trueYear === currentYear && trueMonth === currentMonth) ? "today" : "";
       daysInMonth.push(
         <td key={d} className={`calendar-day ${dayClass} ${eventClass}`}>
           <div className="calendar-date">{d}</div>
-          <div className="event-wrapper">
-            <div className={`event-${eventName}`} ></div>
-          </div>
-          <div>{eventName}</div>
+          {eventsInDay}
         </td>
       );
     }
