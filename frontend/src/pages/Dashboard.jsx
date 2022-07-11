@@ -158,9 +158,9 @@ function Dashboard() {
           <div className="btn" onClick={onClickNext}> Next! </div>
         </div>
         <div className="calendar-control">
-          <form>
+          <form className="calendar-control-form">
             <div>Jump to:</div>
-            <select name="month" id="month" value={currentMonth} onChange={e => setCurrentMonth(parseInt(e.target.value))}>
+            <select className="calendar-control-select" name="month" id="month" value={currentMonth} onChange={e => setCurrentMonth(parseInt(e.target.value))}>
               <option value={0}>January</option>
               <option value={1}>February</option>
               <option value={2}>March</option>
@@ -174,7 +174,7 @@ function Dashboard() {
               <option value={10}>November</option>
               <option value={11}>December</option>
             </select>
-            <select name="year" id="year" value={currentYear} onChange={e => setCurrentYear(parseInt(e.target.value))}>
+            <select className="calendar-control-select" name="year" id="year" value={currentYear} onChange={e => setCurrentYear(parseInt(e.target.value))}>
               <option value={1990}>1990</option>
               <option value={1991}>1991</option>
               <option value={1992}>1992</option>
