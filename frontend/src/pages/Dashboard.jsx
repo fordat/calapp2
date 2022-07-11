@@ -83,6 +83,9 @@ function Dashboard() {
       daysInMonth.push(
         <td key={d} className={`calendar-day ${dayClass} ${eventClass}`}>
           <div className="calendar-date">{d}</div>
+          <div className="event-wrapper">
+            <div className={`event-${eventName}`} ></div>
+          </div>
           <div>{eventName}</div>
         </td>
       );
