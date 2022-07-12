@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createTask } from '../features/tasks/taskSlice';
 
-
 function Dashboard() {
   const [taskValues, setTaskValues] = useState({
     text: '',
     date: '',
+    category: '',
   });
 
-  const { text, date } = taskValues;
+  const { text, date, category } = taskValues;
 
 
   const dispatch = useDispatch();
@@ -21,9 +21,9 @@ function Dashboard() {
       alert("Please enter some text");
     }
 
-    dispatch(createTask({text, date}));
+    dispatch(createTask({text, date, category}));
 
-    setTaskValues({ text: '', date: '' });
+    setTaskValues({ text: '', date: '', category: '', });
   }
 
   return (
@@ -54,6 +54,26 @@ function Dashboard() {
               value={date}
               onChange={(e) => setTaskValues({...taskValues, [e.target.name]: e.target.value})}
             />
+          </div>
+          <div>Category</div>
+          <div className="radio-group">
+            {/* <select 
+              className="calendar-control-select" 
+              name="category" 
+              id="category" 
+              value={category} 
+              onChange={e => setTaskValues({...taskValues, [e.target.name]: e.target.value})}>
+              <option style={{backgroundImage: require('../img/candle.png')}} value="moop">Moop</option>
+              <option value="candle">Candle</option>
+            </select> */}
+            <label htmlFor="candle">
+              <input type="radio" className="radio-candle" name="category" id="candle" value="candle" onChange={(e) => setTaskValues({...taskValues, [e.target.name]: e.target.value})}/>
+              <img src={require('../img/candle.png')}></img>
+            </label>
+            <label htmlFor="moop">
+              <input type="radio" className="radio-moop" name="category" id="moop" value="moop" onChange={(e) => setTaskValues({...taskValues, [e.target.name]: e.target.value})}/>
+              <img style={{height: "20px", width: "20px"}} src={require('../img/doopp.png')}></img>
+            </label>
           </div>
           <div className="form-group">
             <button type='submit' className='btn btn-block'>

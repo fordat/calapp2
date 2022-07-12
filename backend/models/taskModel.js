@@ -12,6 +12,9 @@ const taskSchema = mongoose.Schema({
   },
   date: {
     type: Date,
+  },
+  category: {
+    type: String,
   }
 }, 
 {
