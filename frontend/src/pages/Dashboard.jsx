@@ -28,6 +28,7 @@ function Dashboard() {
   }, [user, navigate, dispatch]);
 
   const tasks2 = tasks.map((d) => ({title: d.text,
+                                    category: d.category,
                                     day: new Date(d.date).getDate(),
                                     month: new Date(d.date).getMonth(),
                                     year: new Date(d.date).getFullYear()}));
@@ -93,10 +94,11 @@ function Dashboard() {
 
       for (let e = 0; e <= eventList.length; e++) {
         if(eventList[e]) {
+          console.log(eventList[e])
           eventsInDay.push(
             <div className="event">
               <div className="event-wrapper">
-                <div className={`event-${eventList[e].title}`} ></div>
+                <div className={`event-${eventList[e].category}`} ></div>
               </div>
               <div>{eventList[e].title}</div>
             </div>

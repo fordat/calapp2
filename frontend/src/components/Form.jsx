@@ -67,11 +67,23 @@ function Dashboard() {
               <option value="candle">Candle</option>
             </select> */}
             <label htmlFor="candle">
-              <input type="radio" className="radio-candle" name="category" id="candle" value="candle" onChange={(e) => setTaskValues({...taskValues, [e.target.name]: e.target.value})}/>
+              <input 
+                type="radio" 
+                name="category" 
+                id="candle" 
+                value="candle" 
+                checked={category !== ''}
+                onChange={(e) => setTaskValues({...taskValues, [e.target.name]: e.target.value})}/>
               <img src={require('../img/candle.png')}></img>
             </label>
             <label htmlFor="moop">
-              <input type="radio" className="radio-moop" name="category" id="moop" value="moop" onChange={(e) => setTaskValues({...taskValues, [e.target.name]: e.target.value})}/>
+              <input 
+                type="radio" 
+                name="category" 
+                id="moop" 
+                value="moop" 
+                checked={category !== ''}
+                onChange={(e) => setTaskValues({...taskValues, [e.target.name]: e.target.value})}/>
               <img style={{height: "20px", width: "20px"}} src={require('../img/doopp.png')}></img>
             </label>
           </div>
