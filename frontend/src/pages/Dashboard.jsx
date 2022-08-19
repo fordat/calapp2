@@ -61,6 +61,14 @@ function Dashboard() {
 
   const calculateDaysInMonth = (year, month) => 32 - new Date(year, month, 32).getDate();
 
+  const yearOptions = [];
+
+  for (let i = 1990; i <= 2030; i++) {
+    yearOptions.push(
+      <option value={i}>{i}</option>
+    )
+  }
+
   const generateCalendar = (currentYear, currentMonth) => {
     let firstDay = (new Date(currentYear, currentMonth)).getDay();
 
@@ -81,23 +89,10 @@ function Dashboard() {
 
       let eventIcons = [];
 
-      // if (eventList.length > 0) {
-      //   for (let e = 0; e <= eventList.length; e++) {
-      //     eventsInDay.push(
-      //       <div className="event">
-      //         <div className="event-wrapper">
-      //           <div className={`event-${eventList[e].title}`} ></div>
-      //         </div>
-      //         <div>{eventList[e].title}</div>
-      //       </div>
-      //     )
-      //   }
-      // }
-
       for (let e = 0; e <= eventList.length; e++) {
         if(eventList[e]) {
           eventIcons.push(
-            <div className="event-wrapper">
+            <div className="event-icon">
               <div className={`event-${eventList[e].category}`} ></div>
             </div>
           );
@@ -175,7 +170,30 @@ function Dashboard() {
       <div className="calendar-wrapper">
         <div>Dashboard!!! Hello {user && user.name}</div>
         <div className="calendar-body">
-          <h3 className="calendar-header">{months[currentMonth] + " " + currentYear}</h3>
+          <div className="calendar-control">
+            <div className="btn" onClick={onClickPrev}> Prev! </div>
+            <form className="calendar-control-form">
+              <select className="calendar-control-select" name="month" id="month" value={currentMonth} onChange={e => setCurrentMonth(parseInt(e.target.value))}>
+                <option value={0}>January</option>
+                <option value={1}>February</option>
+                <option value={2}>March</option>
+                <option value={3}>April</option>
+                <option value={4}>May</option>
+                <option value={5}>June</option>
+                <option value={6}>July</option>
+                <option value={7}>August</option>
+                <option value={8}>September</option>
+                <option value={9}>October</option>
+                <option value={10}>November</option>
+                <option value={11}>December</option>
+              </select>
+              <select className="calendar-control-select" name="year" id="year" value={currentYear} onChange={e => setCurrentYear(parseInt(e.target.value))}>
+                {yearOptions}          
+              </select>
+            </form>
+            <div className="btn" onClick={onClickNext}> Next! </div>
+          </div>
+          
           <table className="calendar">
             <thead>
               <tr>
@@ -190,72 +208,6 @@ function Dashboard() {
             </thead>
             {generateCalendar(currentYear, currentMonth)}
           </table>
-        </div>
-        <div className="calendar-control">
-          <div className="btn" onClick={onClickPrev}> Prev! </div>
-          <div className="btn" onClick={onClickNext}> Next! </div>
-        </div>
-        <div className="calendar-control">
-          <form className="calendar-control-form">
-            <div>Jump to:</div>
-            <select className="calendar-control-select" name="month" id="month" value={currentMonth} onChange={e => setCurrentMonth(parseInt(e.target.value))}>
-              <option value={0}>January</option>
-              <option value={1}>February</option>
-              <option value={2}>March</option>
-              <option value={3}>April</option>
-              <option value={4}>May</option>
-              <option value={5}>June</option>
-              <option value={6}>July</option>
-              <option value={7}>August</option>
-              <option value={8}>September</option>
-              <option value={9}>October</option>
-              <option value={10}>November</option>
-              <option value={11}>December</option>
-            </select>
-            <select className="calendar-control-select" name="year" id="year" value={currentYear} onChange={e => setCurrentYear(parseInt(e.target.value))}>
-              <option value={1990}>1990</option>
-              <option value={1991}>1991</option>
-              <option value={1992}>1992</option>
-              <option value={1993}>1993</option>
-              <option value={1994}>1994</option>
-              <option value={1995}>1995</option>
-              <option value={1996}>1996</option>
-              <option value={1997}>1997</option>
-              <option value={1998}>1998</option>
-              <option value={1999}>1999</option>
-              <option value={2000}>2000</option>
-              <option value={2001}>2001</option>
-              <option value={2002}>2002</option>
-              <option value={2003}>2003</option>
-              <option value={2004}>2004</option>
-              <option value={2005}>2005</option>
-              <option value={2006}>2006</option>
-              <option value={2007}>2007</option>
-              <option value={2008}>2008</option>
-              <option value={2009}>2009</option>
-              <option value={2010}>2010</option>
-              <option value={2011}>2011</option>
-              <option value={2012}>2012</option>
-              <option value={2013}>2013</option>
-              <option value={2014}>2014</option>
-              <option value={2015}>2015</option>
-              <option value={2016}>2016</option>
-              <option value={2017}>2017</option>
-              <option value={2018}>2018</option>
-              <option value={2019}>2019</option>
-              <option value={2020}>2020</option>
-              <option value={2021}>2021</option>
-              <option value={2022}>2022</option>
-              <option value={2023}>2023</option>
-              <option value={2024}>2024</option>
-              <option value={2025}>2025</option>
-              <option value={2026}>2026</option>
-              <option value={2027}>2027</option>
-              <option value={2028}>2028</option>
-              <option value={2029}>2029</option>
-              <option value={2030}>2030</option>           
-            </select>
-          </form>
         </div>
         <ul className="dashboard-list">
           {listTasks}

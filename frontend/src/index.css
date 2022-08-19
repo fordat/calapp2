@@ -55,16 +55,20 @@ label:hover {
   cursor: pointer;
 }
 
-table td, table th {
+table td {
   border: 1px solid black;
   width: 7rem;
   height: 5rem;
   position: relative;
 }
 
-/* .calendar-wrapper {
+table th {
+  border: 1px solid black;
+  width: 7rem;
+  height: 3rem;
+  position: relative;
+}
 
-} */
 
 .calendar {
   border-collapse: collapse;
@@ -83,8 +87,7 @@ table td, table th {
   height: 2rem;
   display: flex;
   justify-content: space-between;
-  margin-top: 3rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .calendar-control-form {
@@ -96,8 +99,8 @@ table td, table th {
   padding: 0px 20px;
   border: 1px solid #000;
   border-radius: 5px;
-  background: #000;
-  color: #fff;
+  background: #fff;
+  color: #000;
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
@@ -141,6 +144,10 @@ table td, table th {
   justify-content: space-between;
 }
 
+.dashboard-list {
+  margin-top: 4rem;
+}
+
 .event-class {
   color: blue;
 }
@@ -157,7 +164,7 @@ table td, table th {
   margin: auto auto;
 }
 
-.event-wrapper {
+.event-icon {
   top: 1.1rem;
   left: 4px;
   width: 20px;
@@ -208,28 +215,6 @@ table td, table th {
 .heading p {
   color: #828282;
 }
-
-/* .tasks {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-.task {
-  background-color: #f4f4f4;
-  margin: 10px 0;
-  padding: 20px 0 10px;
-  position: relative;
-}
-
-.task .close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  cursor: pointer;
-  border: none;
-  background: none;
-} */
 
 .today {
   background-color: rgb(30, 196, 238);
@@ -285,9 +270,8 @@ table td, table th {
 
 .btn {
   padding: 10px 20px;
-  border: 1px solid #000;
-  /* border-radius: 5px; */
-  background: #000;
+  border: outset rgb(182,182,182);
+  background: rgb(170, 170, 170);
   color: #fff;
   font-size: 16px;
   font-weight: 700;
