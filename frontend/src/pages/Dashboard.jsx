@@ -79,6 +79,8 @@ function Dashboard() {
 
       let eventsInDay = [];
 
+      let eventIcons = [];
+
       // if (eventList.length > 0) {
       //   for (let e = 0; e <= eventList.length; e++) {
       //     eventsInDay.push(
@@ -94,26 +96,31 @@ function Dashboard() {
 
       for (let e = 0; e <= eventList.length; e++) {
         if(eventList[e]) {
-          console.log(eventList[e])
+          eventIcons.push(
+            <div className="event-wrapper">
+              <div className={`event-${eventList[e].category}`} ></div>
+            </div>
+          );
+
           eventsInDay.push(
             <div className="event">
-              <div className="event-wrapper">
-                <div className={`event-${eventList[e].category}`} ></div>
-              </div>
-              <div>{eventList[e].title}</div>
+              <div>- {eventList[e].title}</div>
             </div>
-          )
+          );
         }
       }
 
-      console.log(eventsInDay);
       
       let eventClass = eventList.length !== 0 ? "event-class" : "";
 
       let dayClass = (d === currentDate && trueYear === currentYear && trueMonth === currentMonth) ? "today" : "";
+      
       daysInMonth.push(
         <td key={d} className={`calendar-day ${dayClass} ${eventClass}`}>
-          <div className="calendar-date">{d}</div>
+          <div className="calendar-date">
+            {d} 
+            <div className="calendar-icons">{eventIcons}</div>
+          </div>
           {eventsInDay}
         </td>
       );

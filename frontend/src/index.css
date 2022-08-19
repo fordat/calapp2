@@ -57,8 +57,8 @@ label:hover {
 
 table td, table th {
   border: 1px solid black;
-  width: 6rem;
-  height: 4.5rem;
+  width: 7rem;
+  height: 5rem;
   position: relative;
 }
 
@@ -83,7 +83,8 @@ table td, table th {
   height: 2rem;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
 }
 
 .calendar-control-form {
@@ -111,6 +112,20 @@ table td, table th {
   position: absolute;
   top: 2px;
   left: 4px;
+  font-size: 18px;
+}
+
+.calendar-day {
+  font-size: 12px;
+  text-align: left;
+  padding-left: 10px;
+  vertical-align: top;
+  padding-top: 24px;
+}
+
+.calendar-icons {
+  float: right;
+  padding-left: 2px;
 }
 
 .container {
@@ -143,11 +158,11 @@ table td, table th {
 }
 
 .event-wrapper {
-  position: absolute;
   top: 1.1rem;
   left: 4px;
   width: 20px;
   height: 20px;
+  float: right;
 }
 
 .header {
@@ -271,7 +286,7 @@ table td, table th {
 .btn {
   padding: 10px 20px;
   border: 1px solid #000;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   background: #000;
   color: #fff;
   font-size: 16px;
