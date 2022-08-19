@@ -57,22 +57,13 @@ function Dashboard() {
           </div>
           <div>Category</div>
           <div className="radio-group">
-            {/* <select 
-              className="calendar-control-select" 
-              name="category" 
-              id="category" 
-              value={category} 
-              onChange={e => setTaskValues({...taskValues, [e.target.name]: e.target.value})}>
-              <option style={{backgroundImage: require('../img/candle.png')}} value="moop">Moop</option>
-              <option value="candle">Candle</option>
-            </select> */}
             <label htmlFor="candle">
               <input 
                 type="radio" 
                 name="category" 
                 id="candle" 
                 value="candle" 
-                checked={category !== ''}
+                checked={category == 'candle'}
                 onChange={(e) => setTaskValues({...taskValues, [e.target.name]: e.target.value})}/>
               <img src={require('../img/candle.png')}></img>
             </label>
@@ -82,7 +73,7 @@ function Dashboard() {
                 name="category" 
                 id="moop" 
                 value="moop" 
-                checked={category !== ''}
+                checked={category == 'moop'}
                 onChange={(e) => setTaskValues({...taskValues, [e.target.name]: e.target.value})}/>
               <img style={{height: "20px", width: "20px"}} src={require('../img/doopp.png')}></img>
             </label>
