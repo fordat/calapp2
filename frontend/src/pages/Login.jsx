@@ -64,7 +64,7 @@ function Login() {
       </h1>
     </section>
 
-    <section className="form">
+    <section className="form-login">
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <input 
@@ -91,7 +91,6 @@ function Login() {
             Submit
           </button>
         </div>
-
       </form>
     </section>
   </>

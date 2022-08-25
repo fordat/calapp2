@@ -209,9 +209,9 @@ function Dashboard() {
             {generateCalendar(currentYear, currentMonth)}
           </table>
         </div>
-        <ul className="dashboard-list">
+        {/* <ul className="dashboard-list">
           {listTasks}
-        </ul>
+        </ul> */}
       </div>
       <Form />
     </div>
