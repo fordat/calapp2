@@ -28,22 +28,11 @@ function Dashboard() {
 
   return (
     <div className="dashboard-form">
-      <section>
+      <section className="dashboard-form-title">
         <h4>Prepare a task</h4>
       </section>
       <section>
         <form onSubmit={onSubmit}>
-          <div>Text</div>
-          <div className="form-group">
-            <input 
-              type="text"
-              className="form-control"
-              id="text"
-              name="text"
-              value={text}
-              onChange={(e) => setTaskValues({...taskValues, [e.target.name]: e.target.value})}
-            />
-          </div>
           <div>Date</div>
           <div className="form-group">
             <input 
@@ -52,6 +41,17 @@ function Dashboard() {
               id="date"
               name="date"
               value={date}
+              onChange={(e) => setTaskValues({...taskValues, [e.target.name]: e.target.value})}
+            />
+          </div>
+          <div>Text</div>
+          <div className="form-group">
+            <input 
+              type="text"
+              className="form-control"
+              id="text"
+              name="text"
+              value={text}
               onChange={(e) => setTaskValues({...taskValues, [e.target.name]: e.target.value})}
             />
           </div>
@@ -65,17 +65,27 @@ function Dashboard() {
                 value="candle" 
                 checked={category == 'candle'}
                 onChange={(e) => setTaskValues({...taskValues, [e.target.name]: e.target.value})}/>
-              <img src={require('../img/candle.png')}></img>
+              <img src={require('../img/candle-transparent.png')}></img>
             </label>
-            <label htmlFor="moop">
+            <label htmlFor="books">
               <input 
                 type="radio" 
                 name="category" 
-                id="moop" 
-                value="moop" 
-                checked={category == 'moop'}
+                id="books" 
+                value="books" 
+                checked={category == 'books'}
                 onChange={(e) => setTaskValues({...taskValues, [e.target.name]: e.target.value})}/>
-              <img style={{height: "20px", width: "20px"}} src={require('../img/doopp.png')}></img>
+              <img src={require('../img/books-transparent.png')}></img>
+            </label>
+            <label htmlFor="vacation">
+              <input 
+                type="radio" 
+                name="category" 
+                id="vacation" 
+                value="vacation" 
+                checked={category == 'vacation'}
+                onChange={(e) => setTaskValues({...taskValues, [e.target.name]: e.target.value})}/>
+              <img src={require('../img/vacation.png')}></img>
             </label>
           </div>
           <div className="form-group">

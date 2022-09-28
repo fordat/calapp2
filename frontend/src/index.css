@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
   height: 100vh;  
@@ -42,9 +46,16 @@ input[type="radio"] {
   width: 2rem;
 }
 
+input[type="radio"] + img {
+  padding: 2px;
+  border: outset rgb(182,182,182);
+  background: rgb(170, 170, 170);
+}
+
 input[type="radio"]:hover + img,
 input[type="radio"]:checked + img {
-  box-shadow: 0px 0px 10px 5px #000;
+  border: inset rgb(182,182,182);
+  background: rgb(211, 211, 211);
 }
 
 #radios label {
@@ -75,7 +86,7 @@ table th {
 }
 
 .calendar-body {
-  height: 34rem;
+  height: 37rem;
 }
 
 .calendar-btn {
@@ -139,6 +150,7 @@ table th {
   text-align: center;
   opacity: 1;
   background-color: #e6e6e6;
+  border: 3px double black;
 }
 
 .dashboard-wrapper {
@@ -151,7 +163,7 @@ table th {
 }
 
 .event-class {
-  color: blue;
+  color: black;
 }
 
 .event-moop {
@@ -161,7 +173,19 @@ table th {
 }
 
 .event-candle {
-  content: url(./img/candle.png);
+  content: url(./img/candle-transparent.png);
+  animation: shrinkgrow 5s infinite;
+  margin: auto auto;
+}
+
+.event-books {
+  content: url(./img/books-transparent.png);
+  animation: shrinkgrow 5s infinite;
+  margin: auto auto;
+}
+
+.event-vacation {
+  content: url(./img/vacation.png);
   animation: shrinkgrow 5s infinite;
   margin: auto auto;
 }
@@ -179,7 +203,7 @@ table th {
   justify-content: space-between;
   align-items: center;
   padding: 20px 20px;
-  background-color:rgba(85, 75, 75, 0.5);
+  background-color:rgba(126, 109, 109, 0.5);
   border-bottom: 1px solid #e6e6e6;
   margin-bottom: 30px;
 }
@@ -219,7 +243,7 @@ table th {
 }
 
 .today {
-  background-color: rgb(30, 196, 238);
+  background-color: rgb(63, 204, 173);
 }
 
 /* .form,
@@ -241,7 +265,13 @@ table th {
 
 .dashboard-form {
   width: 20%;
-  background-color: pink;
+  /* background-color: pink; */
+  /* border: 1px solid black; */
+}
+
+.dashboard-form-title {
+  margin-bottom: 30px;
+  margin-top: 30px;
 }
 
 .form-group {
@@ -284,7 +314,7 @@ table th {
 .btn {
   padding: 10px 20px;
   border: outset rgb(182,182,182);
-  background: rgb(170, 170, 170);
+  background: rgb(180, 180, 180);
   color: #fff;
   font-size: 16px;
   font-weight: 700;
@@ -311,7 +341,8 @@ table th {
 }
 
 .btn:hover {
-  transform: scale(0.98);
+  /* transform: scale(0.98); */
+  border: inset rgb(202,202,202);
 }
 
 .loadingSpinnerContainer {
