@@ -1,16 +1,18 @@
+import { PromiseProvider } from 'mongoose';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createTask } from '../features/tasks/taskSlice';
 
-function Dashboard() {
-  const [taskValues, setTaskValues] = useState({
-    text: '',
-    date: '',
-    category: '',
-  });
+function Form(props) {
+  // const [taskValues, setTaskValues] = useState({
+  //   text: '',
+  //   date: '',
+  //   category: '',
+  // });
 
-  const { text, date, category } = taskValues;
+  // const { text, date, category } = taskValues;
 
+  const {text, date, category} = props.taskValues;
 
   const dispatch = useDispatch();
 
@@ -23,7 +25,7 @@ function Dashboard() {
 
     dispatch(createTask({text, date, category}));
 
-    setTaskValues({ text: '', date: '', category: '', });
+    props.setTaskValues({ text: '', date: '', category: '', });
   }
 
   return (
@@ -41,7 +43,7 @@ function Dashboard() {
               id="date"
               name="date"
               value={date}
-              onChange={(e) => setTaskValues({...taskValues, [e.target.name]: e.target.value})}
+              onChange={(e) => props.setTaskValues({...props.taskValues, [e.target.name]: e.target.value})}
             />
           </div>
           <div>Text</div>
@@ -52,7 +54,7 @@ function Dashboard() {
               id="text"
               name="text"
               value={text}
-              onChange={(e) => setTaskValues({...taskValues, [e.target.name]: e.target.value})}
+              onChange={(e) => props.setTaskValues({...props.taskValues, [e.target.name]: e.target.value})}
             />
           </div>
           <div>Category</div>
@@ -64,7 +66,7 @@ function Dashboard() {
                 id="candle" 
                 value="candle" 
                 checked={category == 'candle'}
-                onChange={(e) => setTaskValues({...taskValues, [e.target.name]: e.target.value})}/>
+                onChange={(e) => props.setTaskValues({...props.taskValues, [e.target.name]: e.target.value})}/>
               <img src={require('../img/candle-transparent.png')}></img>
             </label>
             <label htmlFor="books">
@@ -74,7 +76,7 @@ function Dashboard() {
                 id="books" 
                 value="books" 
                 checked={category == 'books'}
-                onChange={(e) => setTaskValues({...taskValues, [e.target.name]: e.target.value})}/>
+                onChange={(e) => props.setTaskValues({...props.taskValues, [e.target.name]: e.target.value})}/>
               <img src={require('../img/books-transparent.png')}></img>
             </label>
             <label htmlFor="vacation">
@@ -84,7 +86,7 @@ function Dashboard() {
                 id="vacation" 
                 value="vacation" 
                 checked={category == 'vacation'}
-                onChange={(e) => setTaskValues({...taskValues, [e.target.name]: e.target.value})}/>
+                onChange={(e) => props.setTaskValues({...props.taskValues, [e.target.name]: e.target.value})}/>
               <img src={require('../img/vacation.png')}></img>
             </label>
           </div>
@@ -99,4 +101,4 @@ function Dashboard() {
   )
 }
 
-export default Dashboard
+export default Form

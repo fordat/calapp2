@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getTasks, reset } from '../features/tasks/taskSlice';
+import { createTask, getTasks, reset } from '../features/tasks/taskSlice';
 
 import Form from '../components/Form';
 
@@ -33,10 +33,9 @@ function Dashboard() {
                                     month: new Date(d.date).getMonth(),
                                     year: new Date(d.date).getFullYear()}));
 
-  console.log(tasks2);
-
   const listTasks = tasks.map((d) => <li key={d.text}>{d.text + " " + d.date} </li>);
 
+  // GENERATE TODAY'S DATE AND SAVE IT
   const today = new Date();
   const trueMonth = today.getMonth();
   const trueYear = today.getFullYear();
@@ -45,21 +44,25 @@ function Dashboard() {
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
 
+  // TASK VALUES
+  const [taskValues, setTaskValues] = useState({
+    text: '',
+    date: '',
+    category: '',
+  });
 
-  const months = ["January", 
-                  "February", 
-                  "March", 
-                  "April", 
-                  "May", 
-                  "June", 
-                  "July", 
-                  "August", 
-                  "September", 
-                  "October", 
-                  "November", 
-                  "December"];
+
+  const handleClick = (dd,mm,yy) => {
+    console.log(dd + " " + mm + " " + yy);
+
+    setTaskValues({ ...taskValues, date: `${mm + 1}/${dd}/${yy}`});
+  }
+
+  // MONTH CALCULATION AND RENDER
 
   const calculateDaysInMonth = (year, month) => 32 - new Date(year, month, 32).getDate();
+
+
 
   const yearOptions = [];
 
@@ -111,7 +114,11 @@ function Dashboard() {
       let dayClass = (d === currentDate && trueYear === currentYear && trueMonth === currentMonth) ? "today" : "";
       
       daysInMonth.push(
-        <td key={d} className={`calendar-day ${dayClass} ${eventClass}`}>
+        <td 
+          key={d} 
+          className={`calendar-day ${dayClass} ${eventClass}`}
+          onClick={() => handleClick(d,currentMonth,currentYear)}
+        >
           <div className="calendar-date">
             {d} 
             <div className="calendar-icons">{eventIcons}</div>
@@ -213,7 +220,7 @@ function Dashboard() {
           {listTasks}
         </ul> */}
       </div>
-      <Form />
+      <Form taskValues={taskValues} setTaskValues={setTaskValues}/>
     </div>
   )
 }
