@@ -19,6 +19,8 @@ function Form(props) {
   const onSubmit = e => {
     e.preventDefault();
 
+    console.log("activated")
+
     if (!text) {
       alert("Please enter some text");
     }
@@ -28,75 +30,87 @@ function Form(props) {
     props.setTaskValues({ text: '', date: '', category: '', });
   }
 
+  const onClickX = (e) => {
+    e.preventDefault();
+    if (e.currentTarget === e.target) {
+      props.setOpenModal(false);
+
+    }
+    
+  }
+
   return (
-    <div className="dashboard-form">
-      <section className="dashboard-form-title">
-        <h4>Prepare a task</h4>
-      </section>
-      <section>
-        <form onSubmit={onSubmit}>
-          <div>Date</div>
-          <div className="form-group">
-            <input 
-              type="text"
-              className="form-control"
-              id="date"
-              name="date"
-              value={date}
-              onChange={(e) => props.setTaskValues({...props.taskValues, [e.target.name]: e.target.value})}
-            />
-          </div>
-          <div>Text</div>
-          <div className="form-group">
-            <input 
-              type="text"
-              className="form-control"
-              id="text"
-              name="text"
-              value={text}
-              onChange={(e) => props.setTaskValues({...props.taskValues, [e.target.name]: e.target.value})}
-            />
-          </div>
-          <div>Category</div>
-          <div className="radio-group">
-            <label htmlFor="candle">
-              <input 
-                type="radio" 
-                name="category" 
-                id="candle" 
-                value="candle" 
-                checked={category == 'candle'}
-                onChange={(e) => props.setTaskValues({...props.taskValues, [e.target.name]: e.target.value})}/>
-              <img src={require('../img/candle-transparent.png')}></img>
-            </label>
-            <label htmlFor="books">
-              <input 
-                type="radio" 
-                name="category" 
-                id="books" 
-                value="books" 
-                checked={category == 'books'}
-                onChange={(e) => props.setTaskValues({...props.taskValues, [e.target.name]: e.target.value})}/>
-              <img src={require('../img/books-transparent.png')}></img>
-            </label>
-            <label htmlFor="vacation">
-              <input 
-                type="radio" 
-                name="category" 
-                id="vacation" 
-                value="vacation" 
-                checked={category == 'vacation'}
-                onChange={(e) => props.setTaskValues({...props.taskValues, [e.target.name]: e.target.value})}/>
-              <img src={require('../img/vacation.png')}></img>
-            </label>
-          </div>
-          <div className="form-group">
-            <button type='submit' className='btn btn-block'>
-              Submit
-            </button>
-          </div>
-        </form>
-      </section>
+    <div className="dashboard-form-container" type="button">
+      <div className="dashboard-form">
+        <div type="button" onClick={onClickX}>X</div>
+        <section className="dashboard-form-title">
+          <h4>Prepare a task</h4>
+        </section>
+        <section>
+          <form onSubmit={onSubmit}>
+            <div>Date</div>
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control"
+                id="date"
+                name="date"
+                value={date}
+                onChange={(e) => props.setTaskValues({...props.taskValues, [e.target.name]: e.target.value})}
+              />
+            </div>
+            <div>Text</div>
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control"
+                id="text"
+                name="text"
+                value={text}
+                onChange={(e) => props.setTaskValues({...props.taskValues, [e.target.name]: e.target.value})}
+              />
+            </div>
+            <div>Category</div>
+            <div className="radio-group">
+              <label htmlFor="candle">
+                <input
+                  type="radio"
+                  name="category"
+                  id="candle"
+                  value="candle"
+                  checked={category == 'candle'}
+                  onChange={(e) => props.setTaskValues({...props.taskValues, [e.target.name]: e.target.value})}/>
+                <img src={require('../img/candle-transparent.png')}></img>
+              </label>
+              <label htmlFor="books">
+                <input
+                  type="radio"
+                  name="category"
+                  id="books"
+                  value="books"
+                  checked={category == 'books'}
+                  onChange={(e) => props.setTaskValues({...props.taskValues, [e.target.name]: e.target.value})}/>
+                <img src={require('../img/books-transparent.png')}></img>
+              </label>
+              <label htmlFor="vacation">
+                <input
+                  type="radio"
+                  name="category"
+                  id="vacation"
+                  value="vacation"
+                  checked={category == 'vacation'}
+                  onChange={(e) => props.setTaskValues({...props.taskValues, [e.target.name]: e.target.value})}/>
+                <img src={require('../img/vacation.png')}></img>
+              </label>
+            </div>
+            <div className="form-group">
+              <button type='submit' className='btn btn-block'>
+                Submit
+              </button>
+            </div>
+          </form>
+        </section>
+      </div>
     </div>
   )
 }

@@ -44,6 +44,9 @@ function Dashboard() {
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
 
+  // MODAL
+  const [openModal, setOpenModal] = useState(false);
+
   // TASK VALUES
   const [taskValues, setTaskValues] = useState({
     text: '',
@@ -54,6 +57,8 @@ function Dashboard() {
 
   const handleClick = (dd,mm,yy) => {
     console.log(dd + " " + mm + " " + yy);
+
+    setOpenModal(true);
 
     setTaskValues({ ...taskValues, date: `${mm + 1}/${dd}/${yy}`});
   }
@@ -94,11 +99,13 @@ function Dashboard() {
 
       for (let e = 0; e <= eventList.length; e++) {
         if(eventList[e]) {
-          eventIcons.push(
-            <div className="event-icon">
-              <div className={`event-${eventList[e].category}`} ></div>
-            </div>
-          );
+          if(eventList[e].category) {
+            eventIcons.push(
+              <div className="event-icon">
+                <div className={`event-${eventList[e].category}`} ></div>
+              </div>
+            );
+          }
 
           eventsInDay.push(
             <div className="event">
@@ -174,11 +181,10 @@ function Dashboard() {
   return (
     <div className="dashboard-wrapper">
 
-      <div className="calendar-wrapper">
-        <div>Dashboard!!! Hello {user && user.name}</div>
+        {/* <div>Dashboard!!! Hello {user && user.name}</div> */}
         <div className="calendar-body">
           <div className="calendar-control">
-            <div className="btn" onClick={onClickPrev}> Prev! </div>
+            <div className="btn" onClick={onClickPrev}> Previous </div>
             <form className="calendar-control-form">
               <select className="calendar-control-select" name="month" id="month" value={currentMonth} onChange={e => setCurrentMonth(parseInt(e.target.value))}>
                 <option value={0}>January</option>
@@ -198,7 +204,7 @@ function Dashboard() {
                 {yearOptions}          
               </select>
             </form>
-            <div className="btn" onClick={onClickNext}> Next! </div>
+            <div className="btn" onClick={onClickNext}> Next </div>
           </div>
           
           <table className="calendar">
@@ -219,8 +225,12 @@ function Dashboard() {
         {/* <ul className="dashboard-list">
           {listTasks}
         </ul> */}
-      </div>
-      <Form taskValues={taskValues} setTaskValues={setTaskValues}/>
+      {openModal && 
+        <Form 
+          taskValues={taskValues} 
+          setTaskValues={setTaskValues}
+          setOpenModal={setOpenModal}
+        />}
     </div>
   )
 }

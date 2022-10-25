@@ -75,17 +75,19 @@ table td {
 
 table th {
   border: 1px solid black;
-  width: 7rem;
+  width: 9rem;
   height: 3rem;
   position: relative;
 }
 
 
 .calendar {
+  width: 100%;
   border-collapse: collapse;
 }
 
 .calendar-body {
+  width: 100%;
   height: 37rem;
 }
 
@@ -263,10 +265,24 @@ table th {
   margin: 0 auto;
 }
 
+.dashboard-form-container {
+  width: 1080px;
+  max-width: 100%;
+  height: 70%;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .dashboard-form {
-  width: 20%;
-  /* background-color: pink; */
-  /* border: 1px solid black; */
+  background-color: pink; 
+  border: 1px solid black;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  background-color: pink; 
+  border: 1px solid black;
 }
 
 .dashboard-form-title {
