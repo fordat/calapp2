@@ -19,8 +19,6 @@ function Form(props) {
   const onSubmit = e => {
     e.preventDefault();
 
-    console.log("activated")
-
     if (!text) {
       alert("Please enter some text");
     }

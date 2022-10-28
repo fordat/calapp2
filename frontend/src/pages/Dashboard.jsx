@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createTask, getTasks, reset } from '../features/tasks/taskSlice';
 
 import Form from '../components/Form';
+import EditForm from '../components/EditForm';
 
 
 function Dashboard() {
@@ -27,13 +28,18 @@ function Dashboard() {
     }
   }, [user, navigate, dispatch]);
 
+  console.log(tasks);
+
   const tasks2 = tasks.map((d) => ({title: d.text,
                                     category: d.category,
+                                    id: d._id,
                                     day: new Date(d.date).getDate(),
                                     month: new Date(d.date).getMonth(),
                                     year: new Date(d.date).getFullYear()}));
 
-  const listTasks = tasks.map((d) => <li key={d.text}>{d.text + " " + d.date} </li>);
+  // const listTasks = tasks.map((d) => <li key={d.text}>{d.text + " " + d.date} </li>);
+
+  const [selectedTask, setSelectedTask] = useState({});
 
   // GENERATE TODAY'S DATE AND SAVE IT
   const today = new Date();
@@ -47,6 +53,9 @@ function Dashboard() {
   // MODAL
   const [openModal, setOpenModal] = useState(false);
 
+  // EDIT MODAL
+  const [openEditModal, setOpenEditModal] = useState(false);
+
   // TASK VALUES
   const [taskValues, setTaskValues] = useState({
     text: '',
@@ -55,12 +64,26 @@ function Dashboard() {
   });
 
 
-  const handleClick = (dd,mm,yy) => {
-    console.log(dd + " " + mm + " " + yy);
+  const onClickDay = (dd,mm,yy,event) => {
+    if (event.currentTarget === event.target) {
+      console.log(dd + " " + mm + " " + yy);
 
-    setOpenModal(true);
+      setOpenModal(true);
+  
+      setTaskValues({ ...taskValues, date: `${mm + 1}/${dd}/${yy}`});
+    }
 
-    setTaskValues({ ...taskValues, date: `${mm + 1}/${dd}/${yy}`});
+
+  }
+
+  const onClickTask = (clickedTask, event) => {
+    event.preventDefault();
+    if (event.currentTarget === event.target) {
+      console.log("TASK ", clickedTask);
+      setSelectedTask(clickedTask);
+
+      setOpenEditModal(true);
+    }
   }
 
   // MONTH CALCULATION AND RENDER
@@ -109,7 +132,7 @@ function Dashboard() {
 
           eventsInDay.push(
             <div className="event">
-              <div>- {eventList[e].title}</div>
+              <div onClick={(event) => onClickTask(eventList[e], event)}>- {eventList[e].title}</div>
             </div>
           );
         }
@@ -124,7 +147,7 @@ function Dashboard() {
         <td 
           key={d} 
           className={`calendar-day ${dayClass} ${eventClass}`}
-          onClick={() => handleClick(d,currentMonth,currentYear)}
+          onClick={(event) => onClickDay(d,currentMonth,currentYear,event)}
         >
           <div className="calendar-date">
             {d} 
@@ -230,6 +253,12 @@ function Dashboard() {
           taskValues={taskValues} 
           setTaskValues={setTaskValues}
           setOpenModal={setOpenModal}
+        />}
+
+      {openEditModal && 
+        <EditForm 
+          task={selectedTask}
+          setOpenEditModal={setOpenEditModal}
         />}
     </div>
   )
