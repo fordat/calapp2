@@ -28,24 +28,26 @@ function Form(props) {
     dispatch(createTask({text, date, category}));
 
     props.setTaskValues({ text: '', date: '', category: '', });
+
+    props.setOpenModal(false);
   }
 
   const onClickX = (e) => {
     e.preventDefault();
     if (e.currentTarget === e.target) {
       props.setOpenModal(false);
-
     }
-    
   }
 
   return (
     <div className="dashboard-form-container" type="button">
       <div className="dashboard-form">
-        <div type="button" onClick={onClickX}>X</div>
-        <section className="dashboard-form-title">
-          <h4>Prepare a task</h4>
-        </section>
+        <div className="dashboard-form-header">
+          <div className="dashboard-form-header-x" type="button" onClick={onClickX}>X</div>
+          <section className="dashboard-form-title">
+            <h4>Prepare a task</h4>
+          </section>
+        </div>
         <section>
           <form onSubmit={onSubmit}>
             <div>Date</div>

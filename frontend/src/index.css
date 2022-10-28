@@ -276,13 +276,29 @@ table th {
 }
 
 .dashboard-form {
-  background-color: pink; 
   border: 1px solid black;
   width: 30%;
   display: flex;
   flex-direction: column;
-  background-color: pink; 
+  background-color: rgb(190, 175, 175);
   border: 1px solid black;
+}
+
+.dashboard-form-header {
+  position: relative;
+}
+
+.dashboard-form-header-x {
+  padding: 2px 5px 0 5px;
+  background-color: rgb(255, 72, 72);
+  border: 1px solid black;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.dashboard-form-header-x:hover {
+  cursor: pointer;
 }
 
 .dashboard-form-title {
@@ -292,12 +308,15 @@ table th {
 
 .form-group {
   margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .form-group input,
 .form-group textarea,
 .form-group select {
-  width: 100%;
+  width: 90%;
   padding: 10px;
   border: 1px solid #e6e6e6;
   border-radius: 5px;
@@ -352,7 +371,7 @@ table th {
 }
 
 .btn-block {
-  width: 100%;
+  width: 90%;
   margin-bottom: 20px;
 }
 
