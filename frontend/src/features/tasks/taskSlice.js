@@ -39,7 +39,7 @@ export const getTasks = createAsyncThunk('tasks/getTasks',
   });
 
 // Delete a task
-export const deleteTask = createAsyncThunk('tasks/deleteTask',
+export const deleteTask = createAsyncThunk('tasks/delete',
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
@@ -75,13 +75,26 @@ export const taskSlice = createSlice({
         console.log("rejected payload", action.payload)
         state.message = action.payload;
       })
+      .addCase(deleteTask.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteTask.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.tasks = state.tasks.filter((task) => task._id !== action.payload.id)
+      })
+      .addCase(deleteTask.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        console.log("rejected payload", action.payload)
+        state.message = action.payload;
+      })
       .addCase(getTasks.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(getTasks.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        console.log("action payload in getTasks", action.payload);
         state.tasks = action.payload;
       })
       .addCase(getTasks.rejected, (state, action) => {

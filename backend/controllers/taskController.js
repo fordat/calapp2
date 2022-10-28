@@ -100,7 +100,7 @@ export const deleteTask = async (req, res) => {
   try {
     await task.remove();
 
-    res.status(200).json({'message': `Deleted task ${req.params.id}`});
+    res.status(200).json({'message': `Deleted task ${req.params.id}`, 'id':`${req.params.id}`});
 
   } catch (error) {
     res.status(400).json({ error: error });   

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { createTask, getTasks, reset } from '../features/tasks/taskSlice';
+import { getTasks, reset } from '../features/tasks/taskSlice';
 
 import Form from '../components/Form';
 import EditForm from '../components/EditForm';
@@ -21,14 +21,14 @@ function Dashboard() {
       navigate('/login')
     }
 
+    console.log("WHYY");
+
     dispatch(getTasks());
 
     return () => {
       dispatch(reset);
     }
-  }, [user, navigate, dispatch]);
-
-  console.log(tasks);
+  }, [user, navigate, isError, message, dispatch]);
 
   const tasks2 = tasks.map((d) => ({title: d.text,
                                     category: d.category,
@@ -72,8 +72,6 @@ function Dashboard() {
   
       setTaskValues({ ...taskValues, date: `${mm + 1}/${dd}/${yy}`});
     }
-
-
   }
 
   const onClickTask = (clickedTask, event) => {
@@ -258,6 +256,7 @@ function Dashboard() {
       {openEditModal && 
         <EditForm 
           task={selectedTask}
+          // setTaskValues={setTaskValues}
           setOpenEditModal={setOpenEditModal}
         />}
     </div>

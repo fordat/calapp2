@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteTask } from '../features/tasks/taskSlice';
 
@@ -7,7 +8,7 @@ function EditForm(props) {
 
   const dispatch = useDispatch();
 
-  const onClickDelete = e => {
+  const onClickDelete = (e) => {
     e.preventDefault();
 
     dispatch(deleteTask(props.task.id));
