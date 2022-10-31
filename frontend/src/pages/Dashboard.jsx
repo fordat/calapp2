@@ -21,8 +21,6 @@ function Dashboard() {
       navigate('/login')
     }
 
-    console.log("WHYY");
-
     dispatch(getTasks());
 
     return () => {
@@ -33,7 +31,7 @@ function Dashboard() {
   const tasks2 = tasks.map((d) => ({title: d.text,
                                     category: d.category,
                                     id: d._id,
-                                    day: new Date(d.date).getDate(),
+                                    day: new Date(d.date).getUTCDate(),
                                     month: new Date(d.date).getMonth(),
                                     year: new Date(d.date).getFullYear()}));
 
