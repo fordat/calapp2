@@ -16,8 +16,6 @@ function EditForm(props) {
     props.setOpenEditModal(false);
   }
 
-  console.log(props.task);
-
   const onClickX = (e) => {
     e.preventDefault();
     if (e.currentTarget === e.target) {

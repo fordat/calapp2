@@ -208,18 +208,18 @@ function Dashboard() {
             <div className="btn" onClick={onClickPrev}> Previous </div>
             <form className="calendar-control-form">
               <select className="calendar-control-select" name="month" id="month" value={currentMonth} onChange={e => setCurrentMonth(parseInt(e.target.value))}>
-                <option value={0}>January</option>
-                <option value={1}>February</option>
-                <option value={2}>March</option>
-                <option value={3}>April</option>
-                <option value={4}>May</option>
-                <option value={5}>June</option>
-                <option value={6}>July</option>
-                <option value={7}>August</option>
-                <option value={8}>September</option>
-                <option value={9}>October</option>
-                <option value={10}>November</option>
-                <option value={11}>December</option>
+                <option key={"January"} value={0}>January</option>
+                <option key={"February"} value={1}>February</option>
+                <option key={"March"} value={2}>March</option>
+                <option key={"April"} value={3}>April</option>
+                <option key={"May"} value={4}>May</option>
+                <option key={"June"} value={5}>June</option>
+                <option key={"July"} value={6}>July</option>
+                <option key={"August"} value={7}>August</option>
+                <option key={"September"} value={8}>September</option>
+                <option key={"October"} value={9}>October</option>
+                <option key={"November"} value={10}>November</option>
+                <option key={"December"} value={11}>December</option>
               </select>
               <select className="calendar-control-select" name="year" id="year" value={currentYear} onChange={e => setCurrentYear(parseInt(e.target.value))}>
                 {yearOptions}          
