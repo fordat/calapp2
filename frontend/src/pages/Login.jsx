@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { FaSignInAlt } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { login, reset } from '../features/auth/authSlice'
@@ -59,8 +58,11 @@ function Login() {
 
   return <>
     <section>
-      <h1>
-        <FaSignInAlt /> Login
+      <h1 className="heading-login">
+        <img 
+          src={require('../img/login-transparent.png')} 
+          alt="login"></img>
+        <div className="heading-login-text">Login</div>
       </h1>
     </section>
 

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 // import { toast } from 'react-toastify';
-import { FaUser } from 'react-icons/fa';
 import { register, reset } from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
 
@@ -66,8 +65,12 @@ function Register() {
 
   return <>
     <section>
-      <h1>
-        <FaUser /> Register
+      <h1 className="heading-login">
+        <img 
+          className="heading-login-img" 
+          src={require('../img/register-transparent.png')}
+          alt="register"></img> 
+        <div className="heading-login-text">Register</div>
       </h1>
       <p>Please create an account</p>
     </section>

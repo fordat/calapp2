@@ -1,4 +1,3 @@
-import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../features/auth/authSlice';
@@ -26,17 +25,17 @@ function Header() {
       <ul>
         { user ? (<li>
             <button className='btn' onClick={onLogout}>
-              <FaSignOutAlt /> Logout
+              <img alt="login" src={require('../img/login-transparent.png')}></img> Logout
             </button>
           </li>) : (<> 
           <li>
             <Link to='/login'>
-              <FaSignInAlt /> Login
+              <img alt="login" src={require('../img/login-transparent.png')}></img> Login
             </Link>
           </li>
           <li>
             <Link to='/register'>
-              <FaUser /> Register
+              <img alt="register" src={require('../img/register-transparent.png')}></img> Register
             </Link>
           </li>
         </>)}
