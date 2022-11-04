@@ -72,7 +72,6 @@ function Register() {
           alt="register"></img> 
         <div className="heading-login-text">Register</div>
       </h1>
-      <p>Please create an account</p>
     </section>
 
     <section className="form">
